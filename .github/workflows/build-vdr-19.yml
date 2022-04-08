@@ -16,12 +16,12 @@ jobs:
 
       - name: Checkout CoreELEC-VDR
         run: |
-          if [ ! -d CoreELEC ]; then \
-            git clone https://github.com/Zabrimus/CoreELEC.git \
-            cd CoreELEC \
-          else \
-            cd CoreELEC \
-            git pull \
+          if [ ! -d CoreELEC ]; then 
+            git clone https://github.com/Zabrimus/CoreELEC.git 
+            cd CoreELEC 
+          else 
+            cd CoreELEC 
+            git pull 
           fi
           
           git checkout exp-vdr-opt 
