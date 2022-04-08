@@ -14,16 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Checkout CoreELEC-VDR
+      - name: Build CoreELEC-VDR
         run: |
-          pwd
-          ls -la
-          if [ ! -d CoreELEC ]; then 
-            git clone https://github.com/Zabrimus/CoreELEC.git 
-            cd CoreELEC 
-          else 
-            cd CoreELEC 
-            git pull 
-          fi
-          
-          git checkout exp-vdr-opt 
+          chmod +x build.sh
+          ./build.sh
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: coreelec-vdr.tar.gz
+          path: CoreELEC/target/coreelec-vdr.tar.gz
