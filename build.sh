@@ -40,24 +40,18 @@ mv target/CoreELEC*.system target/image.pass2
 
 #### Create Diff
 cd target
-mkdir pass1
-mkdir pass2
+mkdir -p pass1
+mkdir -p pass2
 squashfuse image.pass1 pass1
 squashfuse image.pass2 pass2
 find pass1 | sed -e "s/^pass1//g ; /^\/opt/d" | sort > pass1.filelist
 find pass2 | sed -e "s/^pass2//g ; /^\/opt/d" | sort > pass2.filelist
-diff -u8bBw pass1.filelist pass2.filelist > files.diff
-
-umount pass1 pass2
+diff -u8bBw pass1.filelist pass2.filelist | sed -e '/^\+/!d ; /^\+\/usr\/bin/d ; /^\+\/usr\/share/d ; s/^\+//g ; /^\+\+/d' > libs.diff
 cd ..
 
-exit 0
-
 # Extract VDR archive
-mkdir -p mnt
-squashfuse target/*system mnt
 mkdir -p vdr-tar
-cp -a mnt/opt vdr-tar
+cp -a target/pass2/opt vdr-tar
 
 # Cleanup
 rm vdr-tar/opt/.opt
@@ -69,11 +63,20 @@ rm -Rf vdr-tar/opt/vdr/share/{doc,mime,pkgconfig,tntnet}
 find vdr-tar/opt/vdr/share/locale/ -not -name "vdr*" -and -not -type d -exec rm {} \;
 find vdr-tar -type d -empty -delete
 
+# copy extra libs from pass1 to vdr-tar
+while read -r line; do
+   NEWFILE=`echo $line | sed -e 's/\/usr\/lib/\/opt\/vdr\/lib/g'`
+   mkdir -p vdr-tar/`dirname $NEWFILE`
+   cp -a target/pass2/$line vdr-tar/$NEWFILE
+done <target/libs.diff
+
 # build final archive
 tar -czhf target/coreelec-vdr.tar.gz -C vdr-tar .
-umount mnt
-rmdir mnt
 rm -Rf vdr-tar
+
+# umount everything
+umount target/pass1
+umount target/pass2
 
 # rm VDR and all dependencies in build directory
 rm -Rf ${RUNNER_BUILDDIR}/build/_*
