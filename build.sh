@@ -53,19 +53,19 @@ cd ..
 mkdir -p vdr-tar
 cp -a target/pass2/opt vdr-tar
 
-# Cleanup
-rm vdr-tar/opt/.opt
-rm vdr-tar/opt/vdr/bin/{createcats,cxxtools-config,gdk-*,iconv,pango*,rsvg-convert,tntnet-config,update-mime-database}
-rm -Rf vdr-tar/opt/vdr/include
-rm -Rf vdr-tar/opt/vdr/lib/pkgconfig
-rm -Rf vdr-tar/opt/vdr/share/{doc,mime,pkgconfig,tntnet}
-
 # copy extra libs from pass1 to vdr-tar
 while read -r line; do
    NEWFILE=`echo $line | sed -e 's/\/usr\/lib/\/opt\/vdr\/lib/g'`
    mkdir -p vdr-tar/`dirname $NEWFILE`
    cp -a target/pass2/$line vdr-tar/$NEWFILE
 done <target/libs.diff
+
+# Cleanup
+rm vdr-tar/opt/.opt
+rm vdr-tar/opt/vdr/bin/{createcats,cxxtools-config,gdk-*,iconv,pango*,rsvg-convert,tntnet-config,update-mime-database}
+rm -Rf vdr-tar/opt/vdr/include
+rm -Rf vdr-tar/opt/vdr/lib/pkgconfig
+rm -Rf vdr-tar/opt/vdr/share/{doc,mime,pkgconfig,tntnet}
 
 find vdr-tar/opt/vdr/share/locale/ -not -name "vdr*" -and -not -type d -exec rm {} \;
 find vdr-tar -type d -empty -delete
