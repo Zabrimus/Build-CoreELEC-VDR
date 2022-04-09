@@ -61,8 +61,8 @@ while read -r line; do
 done <target/libs.diff
 
 # Cleanup
-rm -f vdr-tar/opt/.opt
-rm -f vdr-tar/opt/vdr/bin/{createcats,cxxtools-config,gdk-*,iconv,pango*,rsvg-convert,tntnet-config,update-mime-database}
+rm vdr-tar/opt/.opt
+rm vdr-tar/opt/vdr/bin/{createcats,cxxtools-config,gdk-*,iconv,pango*,rsvg-convert,tntnet-config,update-mime-database}
 rm -Rf vdr-tar/opt/vdr/include
 rm -Rf vdr-tar/opt/vdr/lib/pkgconfig
 rm -Rf vdr-tar/opt/vdr/share/{doc,mime,pkgconfig,tntnet}
