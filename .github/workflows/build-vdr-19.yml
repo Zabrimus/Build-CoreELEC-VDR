@@ -22,4 +22,14 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: coreelec-vdr.tar.gz
-          path: CoreELEC/artifacts/coreelec-vdr.tar.gz
+          path: CoreELEC/build-artifacts/coreelec-vdr.tar.gz
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel.tar
+          path: CoreELEC/build-artifacts/CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel.tar
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel-Odroid_C4.img.gz
+          path: CoreELEC/build-artifacts/CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel-Odroid_C4.img.gz
