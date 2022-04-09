@@ -81,6 +81,11 @@ umount target/pass2
 # rm VDR and all dependencies in build directory
 rm -Rf ${RUNNER_BUILDDIR}/build/_*
 rm -Rf ${RUNNER_BUILDDIR}/install_pkg/_*
+rm -Rf ${RUNNER_BUILDDIR}/image/system/opt
+rm -Rf ${RUNNER_BUILDDIR}/image/.stamps/_*
+rm -Rf ${RUNNER_BUILDDIR}/image/.stamps/vdr-all
+rm -Rf ${RUNNER_BUILDDIR}/.stamps/_*
+rm -Rf ${RUNNER_BUILDDIR}/.stamps/vdr-all
 
 # save build cache
 mkdir -p ../../build-cache
