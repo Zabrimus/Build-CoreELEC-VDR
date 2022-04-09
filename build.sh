@@ -60,15 +60,15 @@ rm -Rf vdr-tar/opt/vdr/include
 rm -Rf vdr-tar/opt/vdr/lib/pkgconfig
 rm -Rf vdr-tar/opt/vdr/share/{doc,mime,pkgconfig,tntnet}
 
-find vdr-tar/opt/vdr/share/locale/ -not -name "vdr*" -and -not -type d -exec rm {} \;
-find vdr-tar -type d -empty -delete
-
 # copy extra libs from pass1 to vdr-tar
 while read -r line; do
    NEWFILE=`echo $line | sed -e 's/\/usr\/lib/\/opt\/vdr\/lib/g'`
    mkdir -p vdr-tar/`dirname $NEWFILE`
    cp -a target/pass2/$line vdr-tar/$NEWFILE
 done <target/libs.diff
+
+find vdr-tar/opt/vdr/share/locale/ -not -name "vdr*" -and -not -type d -exec rm {} \;
+find vdr-tar -type d -empty -delete
 
 # build final archive
 tar -czhf target/coreelec-vdr.tar.gz -C vdr-tar .
