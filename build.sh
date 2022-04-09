@@ -47,6 +47,8 @@ squashfuse image.pass2 pass2
 find pass1 | sed -e "s/^pass1//g ; /^\/opt/d" | sort > pass1.filelist
 find pass2 | sed -e "s/^pass2//g ; /^\/opt/d" | sort > pass2.filelist
 diff -u8bBw pass1.filelist pass2.filelist > files.diff
+
+umount pass1 pass2
 cd ..
 
 exit 0
