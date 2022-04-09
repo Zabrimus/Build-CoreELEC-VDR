@@ -31,10 +31,25 @@ rm -f target/*
 #### 1. Pass: build without VDR
 export VDR="no"
 make
+mv target/CoreELEC*.system target/image.pass1
 
 #### 2. Pass: build with VDR
 export VDR="yes"
 make
+mv target/CoreELEC*.system target/image.pass2
+
+#### Create Diff
+cd target
+mkdir pass1
+mkdir pass2
+squashfuse image.pass1 pass1
+squashfuse image.pass2 pass2
+find pass1 | sed -e "s/^pass1//g ; /^\/opt/d" | sort > pass1.filelist
+find pass2 | sed -e "s/^pass2//g ; /^\/opt/d" | sort > pass2.filelist
+diff -u8bBw pass1.filelist pass2.filelist > files.diff
+cd ..
+
+exit 0
 
 # Extract VDR archive
 mkdir -p mnt
