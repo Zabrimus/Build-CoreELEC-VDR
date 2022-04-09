@@ -57,7 +57,9 @@ cp -a target/pass2/opt vdr-tar
 while read -r line; do
    NEWFILE=`echo $line | sed -e 's/\/usr\/lib/\/opt\/vdr\/lib/g'`
    mkdir -p vdr-tar/`dirname $NEWFILE`
-   cp -a target/pass2/$line vdr-tar/$NEWFILE
+   if [ ! -d target/pass2/$line ]; then
+       cp -a target/pass2/$line vdr-tar/$NEWFILE
+   fi
 done <target/libs.diff
 
 # Cleanup
