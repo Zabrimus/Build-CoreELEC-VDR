@@ -129,10 +129,12 @@ mkdir -p build-artifacts
 rm build-artifacts/*
 
 rm -f target/*
+clean_build_directory
 create_vdr_tar
 cp target/coreelec-vdr.tar.gz build-artifacts/coreelec-vdr.tar.gz
 
 rm -f target/*
+clean_build_directory
 create_vdr_image
 mv target/*.tar build-artifacts/CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel.tar
 mv target/CoreELEC-Amlogic-ng.arm-19.4-Matrix_devel*Odroid_C4.img.gz build-artifacts/CoreELEC-Amlogic-ng.arm-19.4-Matrix_VDR_devel-Odroid_C4.img.gz
