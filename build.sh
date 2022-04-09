@@ -26,8 +26,14 @@ if [ -d ../../build-cache/${RUNNER_SOURCES} ]; then
    ln -s ../../build-cache/${RUNNER_SOURCES} sources
 fi
 
-# build
 rm -f target/*
+
+#### 1. Pass: build without VDR
+export VDR="no"
+make
+
+#### 2. Pass: build with VDR
+export VDR="yes"
 make
 
 # Extract VDR archive
