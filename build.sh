@@ -130,7 +130,7 @@ rm build-artifacts/*
 
 rm -f target/*
 create_vdr_tar
-mv target/coreelec-vdr.tar.gz build-artifacts/coreelec-vdr.tar.gz
+cp target/coreelec-vdr.tar.gz build-artifacts/coreelec-vdr.tar.gz
 
 rm -f target/*
 create_vdr_image
