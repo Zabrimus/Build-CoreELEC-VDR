@@ -22,4 +22,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: coreelec-vdr.tar.gz
-          path: CoreELEC/target/coreelec-vdr.tar.gz
+          path: CoreELEC/artifacts/coreelec-vdr.tar.gz
