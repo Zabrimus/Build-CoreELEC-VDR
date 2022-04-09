@@ -52,6 +52,10 @@ umount mnt
 rmdir mnt
 rm -Rf vdr-tar
 
+# rm VDR and all dependencies in build directory
+rm -Rf ${RUNNER_BUILDDIR}/build/_*
+rm -Rf ${RUNNER_BUILDDIR}/install_pkg/_*
+
 # save build cache
 mkdir -p ../../build-cache
 
