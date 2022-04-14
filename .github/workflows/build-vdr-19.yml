@@ -4,8 +4,10 @@ name: Build CoreELEC/VDR Matrix
 
 # Controls when the workflow will run
 on:
-  workflow_dispatch:
+  push:
     branches: [ main ]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -21,8 +23,17 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: coreelec-vdr.tar.gz
-          path: CoreELEC/build-artifacts/coreelec-vdr.tar.gz
+          name: README.md
+          path: README.md
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            README.md
+            build.sh
+
 
 # Not yet
 #      - uses: actions/upload-artifact@v3
