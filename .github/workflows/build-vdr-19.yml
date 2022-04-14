@@ -18,8 +18,7 @@ jobs:
 
       - name: Build CoreELEC-VDR
         run: |
-          chmod +x build.sh
-          ./build.sh
+          echo "Hallo"
 
       - uses: actions/upload-artifact@v3
         with:
